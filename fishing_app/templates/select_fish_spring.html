@@ -1,3 +1,4 @@
+<!-- select_fish_spring.html -->
 <!doctype html>
 <html>
 <head>
@@ -5,7 +6,7 @@
 </head>
 <body>
     <h1>春の魚を選んでください</h1>
-    <form method="post">
+    <form method="post" action="{{ url_for('select_fish_spring') }}"> <!-- action属性を修正 -->
         {% for fish in fish %}
         <input type="radio" name="fish" value="{{ fish.name }}"> {{ fish.name }}<br>
         {% endfor %}
