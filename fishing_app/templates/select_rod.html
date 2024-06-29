@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>釣り竿選択</title>
+</head>
+<body>
+    <h1>{{ selection['fish'] }}の釣り竿を選んでください</h1>
+    <form method="post">
+        {% for rod in rods %}
+        <input type="radio" name="rod" value="{{ rod.name }}"> {{ rod.name }}<br>
+        {% endfor %}
+        <input type="submit" value="次へ">
+    </form>
+</body>
+</html>
