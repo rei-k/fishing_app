@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}ホーム{% endblock %}
+
+{% block content %}
+<!-- ヒーローセクション -->
+<section class="jumbotron jumbotron-fluid text-white bg-primary text-center">
+    <div class="container">
+        <h1 class="display-4">ようこそ、釣りアプリへ！</h1>
+        <p class="lead">季節ごとに釣れる魚を探して、釣りをもっと楽しみましょう。</p>
+        <a class="btn btn-light btn-lg mt-4" href="{{ url_for('fish', season='all') }}" role="button">全ての魚を見る</a>
+    </div>
+</section>
+
+<!-- サービスの説明セクション -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">サービスの特徴</h2>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='img/feature1.jpg') }}" class="img-fluid rounded-circle mb-3" alt="特徴1">
+            <h4>季節ごとの魚情報</h4>
+            <p>春、夏、秋、冬、それぞれの季節に釣れる魚を詳細に紹介します。魚の特徴、生息地、適した釣り道具など、役立つ情報が満載です。</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='img/feature2.jpg') }}" class="img-fluid rounded-circle mb-3" alt="特徴2">
+            <h4>おすすめの釣りスポット</h4>
+            <p>初心者からベテランまで楽しめる釣りスポットを紹介します。湖、川、海、それぞれの魅力的なスポットを見つけましょう。</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='img/feature3.jpg') }}" class="img-fluid rounded-circle mb-3" alt="特徴3">
+            <h4>釣り道具のガイド</h4>
+            <p>初心者におすすめの釣り竿やリールから、プロフェッショナル向けの道具まで、幅広く紹介します。あなたにぴったりの道具を見つけてください。</p>
+        </div>
+    </div>
+</section>
+
+<!-- 季節ごとの魚のリンクセクション -->
+<section class="container mt-5">
+    <h2 class="text-center mb-4">季節ごとの魚を探す</h2>
+    <div class="row text-center">
+        <div class="col-md-2 col-sm-6 mb-3">
+            <a href="{{ url_for('fish', season='all') }}" class="btn btn-outline-primary btn-lg btn-block">全ての魚</a>
+        </div>
+        <div class="col-md-2 col-sm-6 mb-3">
+            <a href="{{ url_for('fish', season='春') }}" class="btn btn-outline-success btn-lg btn-block">春の魚</a>
+        </div>
+        <div class="col-md-2 col-sm-6 mb-3">
+            <a href="{{ url_for('fish', season='夏') }}" class="btn btn-outline-warning btn-lg btn-block">夏の魚</a>
+        </div>
+        <div class="col-md-2 col-sm-6 mb-3">
+            <a href="{{ url_for('fish', season='秋') }}" class="btn btn-outline-info btn-lg btn-block">秋の魚</a>
+        </div>
+        <div class="col-md-2 col-sm-6 mb-3">
+            <a href="{{ url_for('fish', season='冬') }}" class="btn btn-outline-secondary btn-lg btn-block">冬の魚</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
