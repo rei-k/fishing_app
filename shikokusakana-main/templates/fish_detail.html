@@ -18,18 +18,11 @@
 
     <main class="container mt-5">
         <div class="card">
-            <img src="{{ url_for('static', filename='img/fish_images/' + fish.image) }}" class="card-img-top" alt="{{ fish.fish_name }}">
+            <img src="{{ url_for('static', filename='images/' + fish.image) }}" class="card-img-top" alt="{{ fish.fish_name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ fish.fish_name }}</h5>
                 <p class="card-text">{{ fish.description }}</p>
-                <p><strong>生息地:</strong> {{ fish.habitat }}</p>
-                <p><strong>餌:</strong> {{ fish.bait }}</p>
-                <p><strong>釣り具:</strong> {{ fish.gear }}</p>
-                <p><strong>季節:</strong>
-                {% for season in fish.seasons %}
-                    {{ season.season_name }}{% if not loop.last %}, {% endif %}
-                {% endfor %}
-                </p>
+                <p><strong>季節:</strong> {{ fish.season.season_name }}</p>
                 <a href="{{ url_for('index') }}" class="btn btn-primary">一覧に戻る</a>
             </div>
         </div>
