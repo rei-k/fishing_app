@@ -1,0 +1,118 @@
+/* ベースとなるボディのスタイル設定 */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* ページ全体の背景色を設定 */
+    color: #343a40; /* テキストの基本色を設定 */
+}
+
+/* ナビゲーションバーのドロップダウンメニューのスタイル設定 */
+.navbar-nav .dropdown-menu {
+    background-color: #007bff; /* ドロップダウンメニューの背景色を設定 */
+}
+.navbar-nav .dropdown-item {
+    color: #fff; /* ドロップダウンメニューのアイテムのテキスト色を設定 */
+}
+.navbar-nav .dropdown-item:hover {
+    background-color: #0056b3; /* ドロップダウンメニューのアイテムにホバーしたときの背景色を設定 */
+}
+
+/* フッターのスタイル設定 */
+.footer {
+    background-color: #007bff; /* フッターの背景色を設定 */
+    color: #ffffff; /* フッターのテキスト色を設定 */
+    text-align: center; /* フッターのテキストを中央揃えに設定 */
+    padding: 10px 0; /* フッターの上下にパディングを設定 */
+    position: fixed; /* フッターを固定位置に設定 */
+    width: 100%; /* フッターの幅を全幅に設定 */
+    bottom: 0; /* フッターをページの一番下に配置 */
+}
+
+/* 検索バーのインプットフィールドのスタイル設定 */
+.search-bar input {
+    border-radius: 0.5rem; /* 入力フィールドの角を丸くする */
+    padding: 10px 15px; /* 入力フィールド内のパディングを設定 */
+    border: 1px solid #dee2e6; /* 入力フィールドの枠線の色を設定 */
+}
+
+/* カードコンポーネントのスタイル設定 */
+.card {
+    border-radius: 0.5rem; /* カードの角を丸くする */
+    overflow: hidden; /* カードのコンテンツがはみ出さないようにする */
+    cursor: pointer; /* カードにマウスを乗せるとカーソルが変わる */
+    margin-bottom: 20px; /* カードの下にマージンを設定 */
+    border: 1px solid #dee2e6; /* カードの枠線の色を設定 */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* カードにホバーしたときのアニメーションを設定 */
+    background-color: #fff; /* カードの背景色を設定 */
+    display: flex; /* カードのコンテンツをフレックスボックスで配置 */
+    flex-direction: column; /* カードのコンテンツを縦に配置 */
+}
+.card:hover {
+    transform: scale(1.05); /* カードにホバーしたときの拡大アニメーションを設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* カードにホバーしたときの影を設定 */
+}
+
+/* カード内の画像のスタイル設定 */
+.card img {
+    border-top-left-radius: 0.5rem; /* 画像の左上の角を丸くする */
+    border-top-right-radius: 0.5rem; /* 画像の右上の角を丸くする */
+    width: 100%; /* 画像の幅をカードの全幅に設定 */
+    height: 200px; /* 画像の高さを設定 */
+    object-fit: cover; /* 画像のサイズを調整してコンテナに収める */
+}
+
+/* カードのボディ部分のスタイル設定 */
+.card-body {
+    padding: 15px; /* カードの内側のパディングを設定 */
+    display: flex; /* フレックスボックスで配置 */
+    flex-direction: column; /* コンテンツを縦に配置 */
+    justify-content: space-between; /* コンテンツの間を均等に配置 */
+    flex-grow: 1; /* カードのボディが成長するように設定 */
+}
+
+/* カードのタイトルのスタイル設定 */
+.card-title {
+    font-size: 1.25rem; /* タイトルのフォントサイズを設定 */
+    margin-bottom: 10px; /* タイトルの下にマージンを設定 */
+    color: #007bff; /* タイトルのテキスト色を設定 */
+    font-weight: bold; /* タイトルのフォントを太字に設定 */
+}
+
+/* カードのテキストのスタイル設定 */
+.card-text {
+    margin-bottom: 10px; /* テキストの下にマージンを設定 */
+    flex-grow: 1; /* テキストが成長するように設定 */
+}
+
+/* プライマリーボタンのスタイル設定 */
+.btn-primary {
+    background-color: #007bff; /* ボタンの背景色を設定 */
+    border-color: #007bff; /* ボタンの枠線の色を設定 */
+    margin-top: auto; /* ボタンをカードの下に配置 */
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* ボタンにホバーしたときの背景色を設定 */
+    border-color: #0056b3; /* ボタンにホバーしたときの枠線の色を設定 */
+}
+
+/* モーダルの閉じるボタンのスタイル設定 */
+.btn-close {
+    color: #fff; /* ボタンのテキスト色を設定 */
+    background-color: #007bff; /* ボタンの背景色を設定 */
+    border: none; /* ボタンの枠線をなくす */
+    border-radius: 0.25rem; /* ボタンの角を丸くする */
+    padding: 5px 10px; /* ボタンの内側のパディングを設定 */
+    cursor: pointer; /* ボタンにマウスを乗せるとカーソルが変わる */
+}
+
+/* モーダルのボディ内の画像のスタイル設定 */
+.modal-body img {
+    margin-bottom: 15px; /* 画像の下にマージンを設定 */
+    width: 100%; /* 画像の幅をコンテナの全幅に設定 */
+}
+
+/* メディアクエリ - 小さい画面でのカード画像の高さを調整 */
+@media (max-width: 767px) {
+    .card img {
+        height: 150px; /* 小さい画面では画像の高さを縮小 */
+    }
+}

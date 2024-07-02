@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ season_name }}の魚{% endblock %}
+
+{% block content %}
+<!-- 検索バーのセクション -->
+<div class="search-bar mb-3">
+    <!-- 魚の名前で検索するためのインプットフィールド -->
+    <input type="text" id="searchFish" class="form-control" placeholder="魚の名前で検索...">
+</div>
+
+<!-- ページのタイトル -->
+<h1 class="mb-4 text-center">{{ season_name }}の魚</h1>
+
+<!-- 魚のリストを表示するためのグリッドレイアウト -->
+<div class="row">
+    <!-- fish_list の各魚に対してループ処理を実行 -->
+    {% for fish in fish_list %}
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <!-- 魚の情報を表示するカードコンポーネント -->
+        <div class="card mb-3 shadow-sm">
+            <!-- 魚の画像 -->
+            <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="card-img-top" alt="{{ fish.name }}">
+            <div class="card-body d-flex flex-column">
+                <!-- 魚の名前 -->
+                <h5 class="card-title text-primary">{{ fish.name }}</h5>
+                <!-- 魚の生息場所 -->
+                <p class="card-text mb-4"><strong>生息場所:</strong> {{ fish.habitat }}</p>
+                <!-- 詳細を見るボタン -->
+                <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#fishModal{{ fish.id }}">詳細を見る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 魚の詳細情報を表示するモーダルウィンドウ -->
+    <div class="modal fade" id="fishModal{{ fish.id }}" tabindex="-1" aria-labelledby="fishModalLabel{{ fish.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- モーダルのタイトル（魚の名前） -->
+                    <h5 class="modal-title" id="fishModalLabel{{ fish.id }}">{{ fish.name }}</h5>
+                    <!-- モーダルを閉じるボタン -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 魚の画像 -->
+                    <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="img-fluid mb-3" alt="{{ fish.name }}">
+                    <!-- 魚の生息場所 -->
+                    <p><strong>生息場所:</strong> {{ fish.habitat }}</p>
+                    <!-- 魚のおすすめの餌 -->
+                    <p><strong>おすすめの餌:</strong> {{ fish.bait }}</p>
+                    <!-- 魚の釣り道具 -->
+                    <p><strong>釣り道具:</strong> {{ fish.gear }}</p>
+                    <!-- 魚のロッドと餌の画像 -->
+                    <div class="d-flex justify-content-between">
+                        <img src="{{ url_for('static', filename='img/rod_images/' ~ fish.rod_image) }}" class="img-fluid mb-2 me-2" alt="Rod" style="max-width: 48%;">
+                        <img src="{{ url_for('static', filename='img/bait_images/' ~ fish.bait_image) }}" class="img-fluid mb-2" alt="Bait" style="max-width: 48%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- JavaScript for the search functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchFish');
+    searchInput.addEventListener('input', function() {
+        const filter = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            const title = card.querySelector('.card-title').textContent.toLowerCase();
+            if (title.includes(filter)) {
+                card.parentElement.style.display = '';
+            } else {
+                card.parentElement.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
