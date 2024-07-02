@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -22,32 +22,6 @@ class Fish(db.Model):
     rod_image = db.Column(db.String(50))
     bait_image = db.Column(db.String(50))
     season = db.Column(db.String(50))
-
-class Rod(db.Model):
-    rod_id = db.Column(db.Integer, primary_key=True)
-    rod_name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text)
-
-class Bait(db.Model):
-    bait_id = db.Column(db.Integer, primary_key=True)
-    bait_name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text)
-
-class SelectionSummary(db.Model):
-    summary_id = db.Column(db.Integer, primary_key=True)
-    summary_description = db.Column(db.Text)
-
-class SeasonFish(db.Model):
-    season_id = db.Column(db.Integer, db.ForeignKey('season.season_id'), primary_key=True)
-    fish_id = db.Column(db.Integer, db.ForeignKey('fish.fish_id'), primary_key=True)
-
-class FishRod(db.Model):
-    fish_id = db.Column(db.Integer, db.ForeignKey('fish.fish_id'), primary_key=True)
-    rod_id = db.Column(db.Integer, db.ForeignKey('rod.rod_id'), primary_key=True)
-
-class FishBait(db.Model):
-    fish_id = db.Column(db.Integer, db.ForeignKey('fish.fish_id'), primary_key=True)
-    bait_id = db.Column(db.Integer, db.ForeignKey('bait.bait_id'), primary_key=True)
 
 # 初期データの挿入
 def insert_initial_data():
@@ -75,6 +49,10 @@ def insert_initial_data():
             db.session.add(new_fish)
         db.session.commit()
 
+# 初期データの挿入
+with app.app_context():
+    insert_initial_data()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -96,6 +74,4 @@ def fish(season):
     return render_template('fish.html', fish_list=fish_list, season_name=season_name)
 
 if __name__ == '__main__':
-    with app.app_context():
-        insert_initial_data()
     app.run(debug=True)

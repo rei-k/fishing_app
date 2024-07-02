@@ -1,13 +1,13 @@
-// Improved scripts
+// 改良されたスクリプト
 document.addEventListener('DOMContentLoaded', function() {
     console.log('JavaScript loaded.');
 
     const searchInput = document.querySelector('input[type="search"]');
     searchInput.addEventListener('input', function(event) {
-        const query = event.target.value.toLowerCase();
+        const query = event.target.value.trim().toLowerCase(); // trim()で前後の空白を削除する
         document.querySelectorAll('.card').forEach(card => {
-            const name = card.querySelector('.card-title').textContent.toLowerCase();
-            card.style.display = name.includes(query) ? '' : 'none';
+            const title = card.querySelector('.card-title').textContent.trim().toLowerCase(); // trim()で前後の空白を削除する
+            card.style.display = title.includes(query) ? '' : 'none';
         });
     });
 });
