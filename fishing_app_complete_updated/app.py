@@ -1,16 +1,13 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fishing_app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['STATIC_FOLDER'] = '/Users/xperia/Desktop/fishing_app_complete_updated/img'
 db = SQLAlchemy(app)
 
 # モデルの定義
-class Season(db.Model):
-    season_id = db.Column(db.Integer, primary_key=True)
-    season_name = db.Column(db.String(50), nullable=False)
-
 class Fish(db.Model):
     fish_id = db.Column(db.Integer, primary_key=True)
     fish_name = db.Column(db.String(50), nullable=False)
@@ -28,7 +25,7 @@ def insert_initial_data():
     db.create_all()
     if Fish.query.count() == 0:
         fish_data = [
-            {"fish_name": "アマゴ", "image": "amago.jpg", "habitat": "冷たい山間部の清流", "bait": "イクラ, ミミズ, 虫（クロカワムシ、カワゲラ）", "gear": "初心者: 短めの渓流竿（3.6m）、小型スピニングリール、4lbライン", "rod_image": "beginner_rod.jpg", "bait_image": "ikura.jpg", "season": "春"},
+            {"fish_name": "アマゴ", "image": "newamago.jpg", "habitat": "冷たい山間部の清流", "bait": "イクラ, ミミズ, 虫（クロカワムシ、カワゲラ）", "gear": "初心者: 短めの渓流竿（3.6m）、小型スピニングリール、4lbライン", "rod_image": "beginner_rod.jpg", "bait_image": "ikura.jpg", "season": "春"},
             {"fish_name": "ニジマス", "image": "nijimasu.jpg", "habitat": "清流や渓流", "bait": "ペレット, ミミズ, 虫（カワゲラ）", "gear": "初心者: 3.6mの渓流竿、4lbライン、小型スピニングリール", "rod_image": "beginner_rod.jpg", "bait_image": "mimizu.jpg", "season": "春"},
             {"fish_name": "ウグイ", "image": "ugui.jpg", "habitat": "清流や中流域", "bait": "ミミズ, イクラ, 練り餌", "gear": "初心者: 2.7mの小型の竿、ナイロンライン、ウキ釣りセット", "rod_image": "beginner_rod.jpg", "bait_image": "ikura.jpg", "season": "春"},
             {"fish_name": "ハヤ", "image": "haya.jpg", "habitat": "清流や中流域", "bait": "ミミズ, パン, 練り餌", "gear": "初心者: 2.7mの小型の竿、ナイロンライン、ウキ釣りセット", "rod_image": "beginner_rod.jpg", "bait_image": "pan.jpg", "season": "春"},
@@ -48,10 +45,24 @@ def insert_initial_data():
             db.session.add(new_fish)
         db.session.commit()
 
-# 初期データの挿入
-with app.app_context():
-    insert_initial_data()
+# 画像ファイルのパスを更新する関数
+def update_fish_image(fish_name, new_image_filename):
+    fish = Fish.query.filter_by(fish_name=fish_name).first()
+    if fish:
+        fish.image = new_image_filename
+        db.session.commit()
+        print(f'{fish_name} の画像を更新しました。')
+    else:
+        print(f'{fish_name} はデータベースに存在しません。')
 
+# 新しい画像ファイル名
+new_image_filename = 'newamago.jpg'
+
+# アマゴの画像を更新
+with app.app_context():
+    update_fish_image('アマゴ', new_image_filename)
+
+# ルートとテンプレートの定義
 @app.route('/')
 def index():
     return render_template('index.html')
