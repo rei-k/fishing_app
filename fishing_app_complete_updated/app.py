@@ -55,13 +55,6 @@ def update_fish_image(fish_name, new_image_filename):
     else:
         print(f'{fish_name} はデータベースに存在しません。')
 
-# 新しい画像ファイル名
-new_image_filename = 'newamago.jpg'
-
-# アマゴの画像を更新
-with app.app_context():
-    update_fish_image('アマゴ', new_image_filename)
-
 # ルートとテンプレートの定義
 @app.route('/')
 def index():
