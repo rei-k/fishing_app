@@ -20,10 +20,10 @@
         <!-- 魚の情報を表示するカードコンポーネント -->
         <div class="card mb-3 shadow-sm">
             <!-- 魚の画像 -->
-            <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="card-img-top" alt="{{ fish.name }}">
+            <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="card-img-top" alt="{{ fish.fish_name }}">
             <div class="card-body d-flex flex-column">
                 <!-- 魚の名前 -->
-                <h5 class="card-title text-primary">{{ fish.name }}</h5>
+                <h5 class="card-title text-primary">{{ fish.fish_name }}</h5>
                 <!-- 魚の生息場所 -->
                 <p class="card-text mb-4"><strong>生息場所:</strong> {{ fish.habitat }}</p>
                 <!-- 詳細を見るボタン -->
@@ -38,24 +38,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- モーダルのタイトル（魚の名前） -->
-                    <h5 class="modal-title" id="fishModalLabel{{ fish.fish_id }}">{{ fish.name }}</h5>
+                    <h5 class="modal-title" id="fishModalLabel{{ fish.fish_id }}">{{ fish.fish_name }}</h5>
                     <!-- モーダルを閉じるボタン -->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- 魚の画像 -->
-                    <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="img-fluid mb-3" alt="{{ fish.name }}">
+                    <img src="{{ url_for('static', filename='img/fish_images/' ~ fish.image) }}" class="img-fluid mb-3" alt="{{ fish.fish_name }}">
                     <!-- 魚の生息場所 -->
                     <p><strong>生息場所:</strong> {{ fish.habitat }}</p>
                     <!-- 魚のおすすめの餌 -->
                     <p><strong>おすすめの餌:</strong> {{ fish.bait }}</p>
                     <!-- 魚の釣り道具 -->
                     <p><strong>釣り道具:</strong> {{ fish.gear }}</p>
-                    <!-- 魚のロッドと餌の画像 -->
-                    <div class="d-flex justify-content-between">
-                        <img src="{{ url_for('static', filename='img/rod_images/' ~ fish.rod_image) }}" class="img-fluid mb-2 me-2" alt="Rod" style="max-width: 48%;">
-                        <img src="{{ url_for('static', filename='img/bait_images/' ~ fish.bait_image) }}" class="img-fluid mb-2" alt="Bait" style="max-width: 48%;">
-                    </div>
                 </div>
             </div>
         </div>

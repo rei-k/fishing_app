@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -33,7 +33,6 @@ def insert_initial_data():
             {"fish_name": "ウグイ", "image": "ugui.jpg", "habitat": "清流や中流域", "bait": "ミミズ, イクラ, 練り餌", "gear": "初心者: 2.7mの小型の竿、ナイロンライン、ウキ釣りセット", "rod_image": "beginner_rod.jpg", "bait_image": "ikura.jpg", "season": "春"},
             {"fish_name": "ハヤ", "image": "haya.jpg", "habitat": "清流や中流域", "bait": "ミミズ, パン, 練り餌", "gear": "初心者: 2.7mの小型の竿、ナイロンライン、ウキ釣りセット", "rod_image": "beginner_rod.jpg", "bait_image": "pan.jpg", "season": "春"},
             {"fish_name": "アユ", "image": "ayu.jpg", "habitat": "大きな川の中流域", "bait": "友釣り用の生きたアユ, イクラ", "gear": "初心者: 友釣り用の9mのアユ竿、ナイロンライン、ウキ仕掛け", "rod_image": "ayu_rod.jpg", "bait_image": "ikura.jpg", "season": "夏"},
-            {"fish_name": "テナガエビ", "image": "tenagaebi.jpg", "habitat": "河口付近の汽水域", "bait": "ミミズ, 小さなエビ, 練り餌", "gear": "初心者: 1.8mのエビ用竿、細いナイロンライン、小型ウキ", "rod_image": "ebi_rod.jpg", "bait_image": "ebi.jpg", "season": "夏"},
             {"fish_name": "オイカワ", "image": "oikawa.jpg", "habitat": "清流や中流域", "bait": "ミミズ, 練り餌, 虫（アカムシ）", "gear": "初心者: 2.1mの小型竿、ナイロンライン、小型ウキ", "rod_image": "beginner_rod.jpg", "bait_image": "mushi.jpg", "season": "夏"},
             {"fish_name": "ナマズ", "image": "namazu.jpg", "habitat": "中流から下流域、湖沼", "bait": "ミミズ, 小魚, エビ", "gear": "初心者: 3mの強めの竿、ナイロンライン、ウキ仕掛け", "rod_image": "strong_rod.jpg", "bait_image": "ebi.jpg", "season": "夏"},
             {"fish_name": "イワナ", "image": "iwana.jpg", "habitat": "冷たい山間部の渓流", "bait": "ミミズ, イクラ, 虫（カゲロウの幼虫）", "gear": "初心者: 3.6mの渓流竿、小型スピニングリール、4lbライン", "rod_image": "beginner_rod.jpg", "bait_image": "mimizu.jpg", "season": "秋"},
@@ -67,11 +66,11 @@ def fish(season):
         'winter': '冬'
     }
     season_name = season_map.get(season, '全ての季節')
-    if season == 'all':
+    if season_name == '全ての季節':
         fish_list = Fish.query.all()
     else:
         fish_list = Fish.query.filter_by(season=season_name).all()
-    return render_template('fish.html', fish_list=fish_list, season_name=season_name)
+    return render_template('fish.html', season_name=season_name, fish_list=fish_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
